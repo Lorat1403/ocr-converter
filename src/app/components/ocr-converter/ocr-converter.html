@@ -14,26 +14,30 @@
           hidden
         />
       </label>
-      <p class="error-text" *ngIf="errorMessage()">{{ errorMessage() }}</p>
+      @if (errorMessage()){
+      <p class="error-text">{{ errorMessage() }}</p>
+      }
     </div>
 
-    <div class="preview-container" *ngIf="imagePreview()">
+    @if (imagePreview()) {
+    <div class="preview-container">
       <h3>Попередній перегляд</h3>
       <div class="image-wrapper">
         <img [src]="imagePreview()" alt="Preview" />
       </div>
     </div>
-
-    <div class="loader" *ngIf="isLoading()">
+    } @if (isLoading()) {
+    <div class="loader">
       <div class="spinner"></div>
       <p>Аналізуємо зображення...</p>
     </div>
-
-    <div class="result-container" *ngIf="extractedData() && !isLoading()">
+    } @if (extractedData()){
+    <div class="result-container">
       <div class="result-header">
         <h3>Отриманий текст</h3>
         <button class="copy-btn" (click)="copyToClipboard(extractedText())">Копіювати</button>
       </div>
+
       <div class="text-box">
         @if (extractedText()) {
         {{ extractedText() }}
@@ -42,5 +46,6 @@
         }
       </div>
     </div>
+    }
   </div>
 </div>

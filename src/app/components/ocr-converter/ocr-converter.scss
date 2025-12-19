@@ -1,7 +1,8 @@
 :host {
   display: block;
   font-family: 'Inter', sans-serif;
-  background-color: aquamarine;
+  background-color: rgb(105, 201, 169);
+  border-radius: 10px;
   min-height: 100vh;
   padding: 40px 20px;
 }
@@ -12,6 +13,7 @@
 }
 
 .card {
+  margin-top: 30px;
   background: white;
   padding: 2rem;
   border-radius: 16px;
