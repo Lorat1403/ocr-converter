@@ -1,0 +1,46 @@
+<div class="ocr-container">
+  <div class="card">
+    <h1 class="title">Зображення в Текст</h1>
+    <p class="subtitle">Завантажте JPEG/PNG (до 200Kb) для вилучення тексту</p>
+
+    <div class="upload-section">
+      <label class="file-input-label">
+        <span>Виберіть файл</span>
+        <input
+          type="file"
+          appFileValidator
+          (fileValid)="onFileSelected($event)"
+          (fileError)="handleError($event)"
+          hidden
+        />
+      </label>
+      <p class="error-text" *ngIf="errorMessage()">{{ errorMessage() }}</p>
+    </div>
+
+    <div class="preview-container" *ngIf="imagePreview()">
+      <h3>Попередній перегляд</h3>
+      <div class="image-wrapper">
+        <img [src]="imagePreview()" alt="Preview" />
+      </div>
+    </div>
+
+    <div class="loader" *ngIf="isLoading()">
+      <div class="spinner"></div>
+      <p>Аналізуємо зображення...</p>
+    </div>
+
+    <div class="result-container" *ngIf="extractedData() && !isLoading()">
+      <div class="result-header">
+        <h3>Отриманий текст</h3>
+        <button class="copy-btn" (click)="copyToClipboard(extractedText())">Копіювати</button>
+      </div>
+      <div class="text-box">
+        @if (extractedText()) {
+        {{ extractedText() }}
+        } @else if (extractedData()?.length === 0) {
+        <span class="warning">Текст на зображенні не розпізнано. Спробуйте інше фото.</span>
+        }
+      </div>
+    </div>
+  </div>
+</div>
