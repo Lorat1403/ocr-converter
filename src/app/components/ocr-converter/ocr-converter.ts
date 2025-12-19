@@ -1,7 +1,6 @@
 import { Component, signal, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OcrService } from '../../services/ocr.service';
-import { TextCleanerPipe } from '../../pipes/text-cleaner-pipe';
 import { FileValidator } from '../../directives/file-validator';
 
 @Component({
@@ -19,7 +18,7 @@ private ocrService = inject(OcrService);
   errorMessage = signal<string | null>(null);
   isLoading = signal(false);
 
-  // 1. ПРАВИЛЬНЕ МІСЦЕ ДЛЯ COMPUTED (на рівні класу)
+ 
   extractedText = computed(() => {
    const data = this.extractedData();
   return data ? data.map(item => item.text).join(' ') : '';
@@ -38,7 +37,7 @@ private ocrService = inject(OcrService);
     this.isLoading.set(true);
     this.ocrService.extractText(file).subscribe({
       next: (res) => {
-        console.log('Відповідь API:', res); // Додай це для відладки
+        console.log('Відповідь API:', res); 
         this.extractedData.set(res);
         this.isLoading.set(false);
       },
